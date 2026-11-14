@@ -167,28 +167,18 @@ card:
   title: Where is Lu going?
   content: >
     {% set dep_plan  = 'sensor.traewelling_origin_time' %}
-
     {% set dep_real  = 'sensor.traewelling_origin_time_2' %}
-
     {% set dep_delay = 'sensor.traewelling_departure_delay' %}
-
     {% set arr_plan  = 'sensor.traewelling_arrival_plannedtime' %}
-
     {% set arr_real  = 'sensor.traewelling_arrival_realtime' %}
-
     {% set arr_delay = 'sensor.traewelling_arrival_delay' %}
-
 
     {% macro row(name, plan, real, delay) -%}
 
     {%- set pt = as_timestamp(states(plan), none) -%}
-
     {%- set rt = as_timestamp(states(real), none) -%}
-
     {%- set ps = pt | timestamp_custom('%H:%M') if pt else none -%}
-
     {%- set rs = rt | timestamp_custom('%H:%M') if rt else none -%}
-
     {%- set v = states(delay) | int(0) -%}
 
     {%- if ps and rs and ps != rs -%}
@@ -205,13 +195,12 @@ card:
 
 
     {% set p = states('sensor.traewelling_progress') | int(0) %}
-
-    {% set filled = (p / 5) | round(0) | int %}
+    {% set full = [(p / 5) | int, 20] | min %}
+    {% set bar = ('⣿' * 20) if p >= 100 else (('⣿' * full) ~ '⣦' ~ ('⣀' * (19 - full))) %}
 
 
     ### {{ states('sensor.traewelling_line') }}
-
-
+    
     {{ row(states('sensor.traewelling_origin_name'), dep_plan, dep_real,
     dep_delay) }}
 
@@ -219,6 +208,6 @@ card:
     arr_delay) }}
 
 
-    `{{ '⣿' * filled }}{{ '⣀' * (20 - filled) }}` {{ p }} %
+    `{{ bar }}` {{ p }} %
 ```
 
