@@ -5,6 +5,7 @@ most of the logic in here is written by claude.
 
 its currently using the AccessToken instead of OAuth, which, isn't pretty, but hey it works :p
 you don't need the auth header at all if you have a public profile & only have public check-ins.
+get the AccessToken [here](https://traewelling.de/settings/applications)
 
 adapt this to your liking :D
 
