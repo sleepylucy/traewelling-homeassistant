@@ -8,6 +8,7 @@ you don't need the auth header at all if you have a public profile & only have p
 get the AccessToken [here](https://traewelling.de/settings/applications)
 
 adapt this to your liking :D
+(and make sure to adapt the sensor names in the card, cuz some of those are gonna be different on your end)
 
 here's my home assistant `configuration.yaml`
 
